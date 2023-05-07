@@ -10,7 +10,7 @@ use tokio::sync::watch;
 mod game;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
-enum GameInput {
+pub enum GameInput {
     Up,
     Down,
     Left,
@@ -58,6 +58,7 @@ async fn main() {
 
         game.map.print(&mut stdout);
         println!("Moving in direction: {:?}", current_input);
+        println!("Score: {}", game.snake.pos_history.len());
 
         tokio::time::sleep(Duration::from_millis(500)).await;
         stdout.execute(terminal::Clear(terminal::ClearType::All)).unwrap();
